@@ -1,7 +1,12 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "rome.rome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rome.rome"
   }
 }
