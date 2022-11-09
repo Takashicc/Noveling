@@ -4,8 +4,7 @@
     "next/core-web-vitals",
     "plugin:import/recommended",
     "plugin:import/warnings",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "import/order": [
