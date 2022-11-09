@@ -464,6 +464,36 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
+"@rometools/cli-darwin-arm64@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@rometools/cli-darwin-arm64/-/cli-darwin-arm64-10.0.0.tgz#c219bbdc8a9d53a845b18f6df2affbff5b887b0b"
+  integrity sha512-JT7JccEtKyFDHXy0MxhwHN4Zc94s/kW+0aTczb1ChAoCStfjj5jWzv/yQnm+HFw5Vf3ukAocLsDNRN6d9gQYbQ==
+
+"@rometools/cli-darwin-x64@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@rometools/cli-darwin-x64/-/cli-darwin-x64-10.0.0.tgz#dbf8284c5013d61dbca25ab92027398274ee2e3a"
+  integrity sha512-HORYhz8eM3L3XePPNBhU44zFpTVfhpuO4B7fjdfho7z9kwTW22M0fVvuPrxxPauxmin7gHM8lxCD2jHxabg34Q==
+
+"@rometools/cli-linux-arm64@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@rometools/cli-linux-arm64/-/cli-linux-arm64-10.0.0.tgz#50b3fd210054fc68f2c92494f304d26ab5a8a7b1"
+  integrity sha512-/L3jxo9RUwJ+uvDvAPCquAw10ccpZDuzADfZff5tHd6Fzv28cAToC3JrN/2miGpur0Fx/NIZIPbAsdI4NWGIRA==
+
+"@rometools/cli-linux-x64@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@rometools/cli-linux-x64/-/cli-linux-x64-10.0.0.tgz#5cd3611dc23fcefafaf642791950bc3c940b172d"
+  integrity sha512-KC6CDeSR4haRfxmfrvCn8+NzQ7X31pDjFgD+m+PAbSXOeMr/KHmU7eDsjC3d47ORYYkYXqhx9VxHe1w3IEShMg==
+
+"@rometools/cli-win32-arm64@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@rometools/cli-win32-arm64/-/cli-win32-arm64-10.0.0.tgz#6dfb064de3b9a4c35a89bf32635ba4e675ea85c6"
+  integrity sha512-8XWjx7Z1dMp9q4Lvi+ax4+Y8vkbp7JHVdfrTSMQTyUA9ofaW6ah1h9iGPuKic057VTZGX66/KazC5qNTbrlckQ==
+
+"@rometools/cli-win32-x64@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@rometools/cli-win32-x64/-/cli-win32-x64-10.0.0.tgz#1c5132eb96bac7ba5da59ed7cddac32d33bc933b"
+  integrity sha512-mAf3f32oE919cZ86KVMR/X0VOs+C16jEUyt1ww2UPw/rKUmm0DNfuT6/m4FQW8GEHdCBC8z3zdRVCd05VK7UJg==
+
 "@rushstack/eslint-patch@^1.1.3":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
@@ -1062,11 +1092,6 @@ eslint-config-next@13.0.2:
     eslint-plugin-jsx-a11y "^6.5.1"
     eslint-plugin-react "^7.31.7"
     eslint-plugin-react-hooks "^4.5.0"
-
-eslint-config-prettier@^8.5.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
-  integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-import-resolver-node@^0.3.6:
   version "0.3.6"
@@ -2057,11 +2082,6 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier@^2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
-  integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
-
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -2196,6 +2216,18 @@ rimraf@^3.0.2:
   integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
   dependencies:
     glob "^7.1.3"
+
+rome@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/rome/-/rome-10.0.0.tgz#ae1e291f4b3546881c1709597f7e2e679546fc56"
+  integrity sha512-dQnIlzgHDt94N4JoFaqe9e2aDAZfdmyGOW4UaefMztDph41mt75Mg0aeJ/C7JgcIOLbp9D4LD+omyUB5YFUUPw==
+  optionalDependencies:
+    "@rometools/cli-darwin-arm64" "10.0.0"
+    "@rometools/cli-darwin-x64" "10.0.0"
+    "@rometools/cli-linux-arm64" "10.0.0"
+    "@rometools/cli-linux-x64" "10.0.0"
+    "@rometools/cli-win32-arm64" "10.0.0"
+    "@rometools/cli-win32-x64" "10.0.0"
 
 run-parallel@^1.1.9:
   version "1.2.0"
