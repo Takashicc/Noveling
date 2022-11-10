@@ -11,9 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <MantineProvider
-        withCSSVariables
-        withGlobalStyles
-        withNormalizeCSS
+        withCSSVariables={true}
+        withGlobalStyles={true}
+        withNormalizeCSS={true}
         theme={{ fontFamily: "Zen Kaku Gothic New", colorScheme: "light" }}
       >
         <Component {...pageProps} />
