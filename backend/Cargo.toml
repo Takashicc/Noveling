@@ -8,6 +8,7 @@ actix-web = "4.2.1"
 dotenv = "0.15.0"
 serde = "1.0.151"
 futures = "0.3.25"
+bcrypt = "0.13.0"
 
 [dependencies.mongodb]
 version = "2.2.0"
