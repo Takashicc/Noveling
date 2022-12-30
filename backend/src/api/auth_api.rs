@@ -12,10 +12,8 @@ use crate::{
 
 #[post("/signup")]
 pub async fn signup(db: Data<MongoRepo>, data: Json<SignUpDTO>) -> Result<HttpResponse, AppError> {
-    println!("Checking user exists by email");
     let user_exists = db.user_exists_by_email(&data.email).await?;
     if user_exists {
-        println!("User exists!!");
         return Err(AppError {
             error_type: AppErrorType::AlreadyExists,
             status_code: None,
