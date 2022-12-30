@@ -19,9 +19,9 @@ impl MongoRepo {
             .expect("Unable to connect to database");
         println!("Successfully connected to database");
 
-        let col: Collection<User> = db.collection("User");
+        let user_col: Collection<User> = db.collection("User");
 
-        MongoRepo { user_col: col }
+        MongoRepo { user_col }
     }
 
     // pub async fn update_user(&self, id: &String, new_user: User) -> Result<UpdateResult, Error> {
