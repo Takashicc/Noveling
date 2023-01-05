@@ -15,7 +15,7 @@ impl Config {
             .add_source(config::Environment::default())
             .build()?;
 
-        Ok(cfg.try_deserialize()?)
+        cfg.try_deserialize()
     }
 }
 
@@ -23,3 +23,7 @@ pub static CONFIG: Lazy<Config> = Lazy::new(|| {
     dotenv().expect("Cannot found .env file");
     Config::from_env().expect("Failed to load config")
 });
+
+pub const MESSAGE_EMAIL_PASSWORD_INCORRECT: &str = "Email not found or Password incorrect";
+pub const MESSAGE_USER_ALREADY_EXISTS: &str = "User already exists";
+pub const MESSAGE_UNEXPECTED_ERROR: &str = "An unexpected error has occurred";
