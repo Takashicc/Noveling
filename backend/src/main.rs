@@ -19,7 +19,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(db_data.clone())
             .configure(config::api_config::config_services)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind((constants::CONFIG.host.as_ref(), constants::CONFIG.port))?
     .run()
     .await
 }
