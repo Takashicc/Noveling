@@ -1,9 +1,9 @@
 use config::ConfigError;
 use dotenv::dotenv;
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use serde::Deserialize;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize)]
 pub struct Config {
     pub mongo_uri: String,
     pub jwt_secret: String,
@@ -19,10 +19,7 @@ impl Config {
     }
 }
 
-lazy_static! {
-    pub static ref CONFIG: Config = {
-        dotenv().expect("Cannot found .env file");
-
-        Config::from_env().expect("Failed to load config")
-    };
-}
+pub static CONFIG: Lazy<Config> = Lazy::new(|| {
+    dotenv().expect("Cannot found .env file");
+    Config::from_env().expect("Failed to load config")
+});
