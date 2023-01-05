@@ -5,6 +5,8 @@ use serde::Deserialize;
 
 #[derive(Deserialize)]
 pub struct Config {
+    pub host: String,
+    pub port: u16,
     pub mongo_uri: String,
     pub jwt_secret: String,
 }
