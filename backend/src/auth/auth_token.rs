@@ -1,5 +1,5 @@
 use chrono::{Duration, Utc};
-use jsonwebtoken::{encode, EncodingKey, Header};
+use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use mongodb::bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
 
@@ -28,6 +28,18 @@ impl Claims {
             &Self { iat, exp, user_id },
             &EncodingKey::from_secret(constants::CONFIG.jwt_secret.as_ref()),
         )?)
+    }
+
+    pub fn validate_token(token: &str) -> Result<Self, AppError> {
+        // Ok(decode(
+        //     token,
+        //     &DecodingKey::from_secret(constants::CONFIG.jwt_secret.as_ref()),
+        //     &Validation::default(),
+        // )?
+        // .claims)
+
+        // TODO check exp is valid and user_id exist
+        todo!();
     }
 }
 
