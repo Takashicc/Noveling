@@ -34,6 +34,13 @@ impl MongoRepo {
         Ok(true)
     }
 
+    pub async fn find_user_by_email(&self, email: &str) -> Result<Option<User>, AppError> {
+        let filter = doc! {"email": email};
+        let user = self.user_col.find_one(filter, None).await?;
+
+        Ok(user)
+    }
+
     pub async fn create_user(&self, dto: SignUpDTO) -> Result<InsertOneResult, AppError> {
         let user = User {
             id: None,
