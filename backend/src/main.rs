@@ -1,5 +1,6 @@
 mod api;
 mod config;
+mod constants;
 mod errors;
 mod models;
 mod repository;

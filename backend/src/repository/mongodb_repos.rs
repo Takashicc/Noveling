@@ -1,7 +1,5 @@
-use crate::models::user_model::User;
-use dotenv::dotenv;
+use crate::{constants, models::user_model::User};
 use mongodb::{bson::doc, Client, Collection};
-use std::env;
 
 pub struct MongoRepo {
     pub user_col: Collection<User>,
@@ -9,9 +7,7 @@ pub struct MongoRepo {
 
 impl MongoRepo {
     pub async fn init() -> Self {
-        dotenv().ok();
-
-        let uri = env::var("MONGO_URI").expect("Failed to load MONGO_URI");
+        let uri = &constants::CONFIG.mongo_uri;
         let client = Client::with_uri_str(uri).await.unwrap();
         let db = client.database("noveling");
         db.run_command(doc! {"ping": 1}, None)
