@@ -22,6 +22,12 @@ pub struct SignUpDTO {
     pub password: String,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct LoginDTO {
+    pub email: String,
+    pub password: String,
+}
+
 impl MongoRepo {
     pub async fn user_exists_by_email(&self, email: &str) -> Result<bool, AppError> {
         let filter = doc! {"email": email};
