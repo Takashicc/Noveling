@@ -1,5 +1,5 @@
 use config::ConfigError;
-use dotenv::dotenv;
+use dotenvy::dotenv;
 use once_cell::sync::Lazy;
 use serde::Deserialize;
 
