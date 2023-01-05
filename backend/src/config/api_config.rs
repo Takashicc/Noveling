@@ -7,7 +7,8 @@ pub fn config_services(config: &mut ServiceConfig) {
         web::scope("/api").service(
             web::scope("/auth")
                 .service(auth_api::signup)
-                .service(auth_api::login),
+                .service(auth_api::login)
+                .service(auth_api::protected),
         ),
     );
 }

@@ -5,7 +5,10 @@ use actix_web::{
 };
 
 use crate::{
-    auth::auth_token::{Claims, Token},
+    auth::{
+        auth_token::{Claims, Token},
+        middleware::AuthService,
+    },
     constants,
     errors::AppError,
     models::user_model::{LoginDTO, SignUpDTO},
@@ -48,4 +51,10 @@ pub async fn login(db: Data<MongoRepo>, data: Json<LoginDTO>) -> Result<HttpResp
     }
 
     Ok(HttpResponse::Ok().json(Token::new_bearer(Claims::generate_token(user.id)?)))
+}
+
+// TODO delete this route
+#[post("/protected/example")]
+pub async fn protected(_: AuthService) -> Result<HttpResponse, AppError> {
+    Ok(HttpResponse::Ok().json("Hello from protected"))
 }
