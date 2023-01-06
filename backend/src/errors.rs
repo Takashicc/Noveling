@@ -100,21 +100,13 @@ impl From<mongodb::error::Error> for AppError {
 
 impl From<bcrypt::BcryptError> for AppError {
     fn from(_: bcrypt::BcryptError) -> Self {
-        Self {
-            error_type: AppErrorType::Server,
-            status_code: None,
-            message: None,
-        }
+        Self::unexpected_error()
     }
 }
 
 impl From<jsonwebtoken::errors::Error> for AppError {
     fn from(_: jsonwebtoken::errors::Error) -> Self {
-        Self {
-            error_type: AppErrorType::Server,
-            status_code: None,
-            message: None,
-        }
+        Self::unexpected_error()
     }
 }
 
