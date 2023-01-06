@@ -66,6 +66,10 @@ pub struct AppErrorResponse {
 
 impl ResponseError for AppError {
     fn status_code(&self) -> StatusCode {
+        if let Some(code) = self.status_code {
+            return code;
+        }
+
         match self.error_type {
             AppErrorType::Db => StatusCode::INTERNAL_SERVER_ERROR,
             AppErrorType::Server => StatusCode::INTERNAL_SERVER_ERROR,
@@ -74,10 +78,7 @@ impl ResponseError for AppError {
     }
 
     fn error_response(&self) -> HttpResponse<actix_web::body::BoxBody> {
-        let mut status_code = self.status_code();
-        if let Some(code) = self.status_code {
-            status_code = code;
-        }
+        let status_code = self.status_code();
 
         HttpResponse::build(status_code).json(AppErrorResponse {
             message: self.message(),
