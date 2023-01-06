@@ -19,7 +19,9 @@ use crate::{
 pub async fn signup(db: Data<MongoRepo>, data: Json<SignUpDTO>) -> Result<HttpResponse, AppError> {
     let user_exists = db.user_exists_by_email(&data.email).await?;
     if user_exists {
-        return Err(AppError::user_error(constants::MESSAGE_USER_ALREADY_EXISTS));
+        return Err(AppError::bad_request_error(
+            constants::MESSAGE_USER_ALREADY_EXISTS,
+        ));
     }
 
     let hashed_password = bcrypt::hash(&data.password, bcrypt::DEFAULT_COST)?;
@@ -37,7 +39,7 @@ pub async fn login(db: Data<MongoRepo>, data: Json<LoginDTO>) -> Result<HttpResp
     let user = match db.find_user_by_email(&data.email).await? {
         Some(v) => v,
         None => {
-            return Err(AppError::user_error(
+            return Err(AppError::bad_request_error(
                 constants::MESSAGE_EMAIL_PASSWORD_INCORRECT,
             ));
         }
@@ -45,7 +47,7 @@ pub async fn login(db: Data<MongoRepo>, data: Json<LoginDTO>) -> Result<HttpResp
 
     let is_valid_password = bcrypt::verify(&data.password, &user.password)?;
     if !is_valid_password {
-        return Err(AppError::user_error(
+        return Err(AppError::bad_request_error(
             constants::MESSAGE_EMAIL_PASSWORD_INCORRECT,
         ));
     }

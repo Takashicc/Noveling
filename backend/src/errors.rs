@@ -20,10 +20,10 @@ pub struct AppError {
 }
 
 impl AppError {
-    pub fn user_error(message: &str) -> Self {
+    pub fn bad_request_error(message: &str) -> Self {
         Self {
             error_type: AppErrorType::User,
-            status_code: None,
+            status_code: Some(StatusCode::BAD_REQUEST),
             message: Some(message.to_string()),
         }
     }
