@@ -19,11 +19,6 @@ pub struct AppError {
     pub message: Option<String>,
 }
 
-#[derive(Serialize)]
-pub struct AppErrorResponse {
-    pub message: String,
-}
-
 impl AppError {
     pub fn new(
         error_type: AppErrorType,
@@ -82,6 +77,11 @@ impl fmt::Display for AppError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{:?}", self)
     }
+}
+
+#[derive(Serialize)]
+pub struct AppErrorResponse {
+    message: String,
 }
 
 impl ResponseError for AppError {
