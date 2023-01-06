@@ -14,9 +14,9 @@ pub enum AppErrorType {
 
 #[derive(Debug)]
 pub struct AppError {
-    pub error_type: AppErrorType,
-    pub status_code: Option<StatusCode>,
-    pub message: Option<String>,
+    error_type: AppErrorType,
+    status_code: Option<StatusCode>,
+    message: Option<String>,
 }
 
 impl AppError {
