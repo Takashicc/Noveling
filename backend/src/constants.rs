@@ -29,3 +29,7 @@ pub static CONFIG: Lazy<Config> = Lazy::new(|| {
 pub const MESSAGE_EMAIL_PASSWORD_INCORRECT: &str = "Email not found or Password incorrect";
 pub const MESSAGE_USER_ALREADY_EXISTS: &str = "User already exists";
 pub const MESSAGE_UNEXPECTED_ERROR: &str = "An unexpected error has occurred";
+pub const MESSAGE_AUTHORIZATION_HEADER_MISSING: &str = "Authorization header missing";
+pub const MESSAGE_INVALID_TOKEN_TYPE: &str = "Invalid token type";
+pub const MESSAGE_TOKEN_TYPE_MISSING: &str = "Token type missing";
+pub const MESSAGE_TOKEN_MISSING: &str = "Token missing";
