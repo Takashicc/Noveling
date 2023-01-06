@@ -61,6 +61,14 @@ impl AppError {
         }
     }
 
+    pub fn unexpected_error() -> Self {
+        Self {
+            error_type: AppErrorType::Server,
+            status_code: Some(StatusCode::INTERNAL_SERVER_ERROR),
+            message: Some(constants::MESSAGE_UNEXPECTED_ERROR.to_string()),
+        }
+    }
+
     fn message(&self) -> String {
         if let Some(message) = &self.message {
             return message.to_owned();
