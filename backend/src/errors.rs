@@ -20,18 +20,6 @@ pub struct AppError {
 }
 
 impl AppError {
-    pub fn new(
-        error_type: AppErrorType,
-        status_code: Option<StatusCode>,
-        message: Option<String>,
-    ) -> Self {
-        Self {
-            error_type,
-            status_code,
-            message,
-        }
-    }
-
     pub fn user_error(message: &str) -> Self {
         Self {
             error_type: AppErrorType::User,
