@@ -1,9 +1,10 @@
+use actix_web::web::Data;
 use chrono::{Duration, Utc};
 use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use mongodb::bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
 
-use crate::{constants, errors::AppError};
+use crate::{constants, errors::AppError, repository::mongodb_repos::MongoRepo};
 
 #[derive(Serialize, Deserialize)]
 pub struct Claims {
@@ -30,7 +31,7 @@ impl Claims {
         )?)
     }
 
-    pub fn validate_token(token: &str) -> Result<Self, AppError> {
+    pub async fn validate_token(token: &str, db: &Data<MongoRepo>) -> Result<Self, AppError> {
         let claims: Self = match decode(
             token,
             &DecodingKey::from_secret(constants::CONFIG.jwt_secret.as_ref()),
@@ -45,9 +46,12 @@ impl Claims {
             return Err(AppError::unauthorized_error("Token expired"));
         }
 
+        let user_exits = db.user_exists_by_id(&claims.user_id).await?;
+        if !user_exits {
+            return Err(AppError::unauthorized_error("Cannot find user from token"));
+        }
+
         Ok(claims)
-        // TODO check user_id exist
-        // todo!();
     }
 }
 
