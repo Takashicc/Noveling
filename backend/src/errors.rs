@@ -136,3 +136,9 @@ impl From<jsonwebtoken::errors::Error> for AppError {
         }
     }
 }
+
+impl From<mongodb::bson::oid::Error> for AppError {
+    fn from(_: mongodb::bson::oid::Error) -> Self {
+        Self::unexpected_error()
+    }
+}
