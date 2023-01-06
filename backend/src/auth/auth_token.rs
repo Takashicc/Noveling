@@ -31,15 +31,23 @@ impl Claims {
     }
 
     pub fn validate_token(token: &str) -> Result<Self, AppError> {
-        // Ok(decode(
-        //     token,
-        //     &DecodingKey::from_secret(constants::CONFIG.jwt_secret.as_ref()),
-        //     &Validation::default(),
-        // )?
-        // .claims)
+        let claims: Self = match decode(
+            token,
+            &DecodingKey::from_secret(constants::CONFIG.jwt_secret.as_ref()),
+            &Validation::default(),
+        ) {
+            Ok(v) => v.claims,
+            Err(_) => return Err(AppError::unauthorized_error("Token invalid")),
+        };
 
-        // TODO check exp is valid and user_id exist
-        todo!();
+        let now = Utc::now().timestamp();
+        if now >= claims.exp {
+            return Err(AppError::unauthorized_error("Token expired"));
+        }
+
+        Ok(claims)
+        // TODO check user_id exist
+        // todo!();
     }
 }
 
@@ -53,6 +61,7 @@ pub struct Token {
     pub token: String,
     pub token_type: TokenType,
 }
+
 impl Token {
     pub fn new_bearer(token: String) -> Self {
         Self {
