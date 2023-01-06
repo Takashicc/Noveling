@@ -8,7 +8,9 @@ pub struct MongoRepo {
 impl MongoRepo {
     pub async fn init() -> Self {
         let uri = &constants::CONFIG.mongo_uri;
-        let client = Client::with_uri_str(uri).await.unwrap();
+        let client = Client::with_uri_str(uri)
+            .await
+            .expect("Failed to parse Mongo URI");
         let db = client.database("noveling");
         db.run_command(doc! {"ping": 1}, None)
             .await
