@@ -19,7 +19,10 @@ impl FromRequest for AuthService {
     ) -> Self::Future {
         let auth_header = req.headers().get("Authorization");
         let token = match auth_header {
-            Some(v) => v.to_str().unwrap(),
+            Some(v) => match v.to_str() {
+                Ok(v) => v,
+                Err(_) => return err(AppError::unexpected_error()),
+            },
             None => {
                 return err(AppError::unauthorized_error(
                     constants::MESSAGE_AUTHORIZATION_HEADER_MISSING,
