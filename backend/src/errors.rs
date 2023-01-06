@@ -28,14 +28,6 @@ impl AppError {
         }
     }
 
-    pub fn server_error(message: &str) -> Self {
-        Self {
-            error_type: AppErrorType::Server,
-            status_code: None,
-            message: Some(message.to_string()),
-        }
-    }
-
     pub fn unauthorized_error(message: &str) -> Self {
         Self {
             error_type: AppErrorType::User,
