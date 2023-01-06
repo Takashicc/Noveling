@@ -17,7 +17,7 @@ impl Claims {
     pub fn generate_token(id: Option<ObjectId>) -> Result<String, AppError> {
         let user_id = match id {
             Some(v) => v.to_string(),
-            None => return Err(AppError::server_error(constants::MESSAGE_UNEXPECTED_ERROR)),
+            None => return Err(AppError::unexpected_error()),
         };
 
         let now = Utc::now();
