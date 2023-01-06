@@ -1,7 +1,7 @@
 use actix_web::FromRequest;
 use futures::future::{err, ok, Ready};
 
-use crate::errors::AppError;
+use crate::{constants, errors::AppError};
 
 use super::auth_token::Claims;
 
@@ -20,25 +20,39 @@ impl FromRequest for AuthService {
         let auth_header = req.headers().get("Authorization");
         let token = match auth_header {
             Some(v) => v.to_str().unwrap(),
-            None => return err(AppError::server_error("Authorization header missing")),
+            None => {
+                return err(AppError::unauthorized_error(
+                    constants::MESSAGE_AUTHORIZATION_HEADER_MISSING,
+                ))
+            }
         };
 
         let mut split_token = token.split_whitespace();
         match split_token.next() {
             Some(token_type) => {
                 if token_type != "Bearer" {
-                    return err(AppError::server_error("Invalid token type"));
+                    return err(AppError::unauthorized_error(
+                        constants::MESSAGE_INVALID_TOKEN_TYPE,
+                    ));
                 }
             }
-            None => return err(AppError::server_error("Token type missing")),
+            None => {
+                return err(AppError::unauthorized_error(
+                    constants::MESSAGE_TOKEN_TYPE_MISSING,
+                ))
+            }
         };
 
         let claims = match split_token.next() {
             Some(token) => match Claims::validate_token(token) {
                 Ok(v) => v,
-                Err(_) => return err(AppError::server_error("Token invalid")),
+                Err(e) => return err(e),
             },
-            None => return err(AppError::server_error("Token missing")),
+            None => {
+                return err(AppError::unauthorized_error(
+                    constants::MESSAGE_TOKEN_MISSING,
+                ))
+            }
         };
 
         ok(Self { claims })
