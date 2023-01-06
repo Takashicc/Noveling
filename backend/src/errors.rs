@@ -53,6 +53,14 @@ impl AppError {
         }
     }
 
+    pub fn unauthorized_error(message: &str) -> Self {
+        Self {
+            error_type: AppErrorType::User,
+            status_code: Some(StatusCode::UNAUTHORIZED),
+            message: Some(message.to_string()),
+        }
+    }
+
     fn message(&self) -> String {
         if let Some(message) = &self.message {
             return message.to_owned();
