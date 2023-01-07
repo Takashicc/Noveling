@@ -9,6 +9,7 @@ pub struct Config {
     pub port: u16,
     pub mongo_uri: String,
     pub jwt_secret: String,
+    pub log_level: String,
 }
 
 impl Config {
