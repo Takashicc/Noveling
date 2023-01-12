@@ -23,7 +23,7 @@ impl Config {
 }
 
 pub static CONFIG: Lazy<Config> = Lazy::new(|| {
-    dotenv().expect("Cannot found .env file");
+    dotenv().expect("Cannot find .env file");
     Config::from_env().expect("Failed to load config")
 });
 
@@ -34,3 +34,31 @@ pub const MESSAGE_AUTHORIZATION_HEADER_MISSING: &str = "Authorization header mis
 pub const MESSAGE_INVALID_TOKEN_TYPE: &str = "Invalid token type";
 pub const MESSAGE_TOKEN_TYPE_MISSING: &str = "Token type missing";
 pub const MESSAGE_TOKEN_MISSING: &str = "Token missing";
+
+#[cfg(test)]
+pub mod test_config {
+    use std::{env, sync::Arc};
+
+    use crate::repository::mongodb_repos::MongoRepo;
+    use async_once_cell::OnceCell;
+    use dotenvy::dotenv;
+
+    static TEST_DATABASE: OnceCell<Arc<MongoRepo>> = OnceCell::new();
+
+    pub async fn setup() -> &'static Arc<MongoRepo> {
+        TEST_DATABASE
+            .get_or_init(async {
+                dotenv().expect("Cannot find .env file");
+
+                let uri = env::var("TEST_MONGO_URI")
+                    .expect("TEST_MONGO_URI environment variable not found");
+
+                Arc::new(MongoRepo::init(&uri).await)
+            })
+            .await
+    }
+
+    pub async fn teardown(db: &MongoRepo) {
+        db.user_col.drop(None).await.unwrap();
+    }
+}
