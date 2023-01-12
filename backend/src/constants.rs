@@ -23,7 +23,7 @@ impl Config {
 }
 
 pub static CONFIG: Lazy<Config> = Lazy::new(|| {
-    dotenv().expect("Cannot found .env file");
+    dotenv().expect("Cannot find .env file");
     Config::from_env().expect("Failed to load config")
 });
 
