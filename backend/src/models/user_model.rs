@@ -73,3 +73,51 @@ impl MongoRepo {
         Ok(result)
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    mod user_exists_by_email {
+        use actix_web::rt::test;
+
+        use crate::constants::test_config::{setup, teardown};
+
+        use super::super::*;
+
+        #[test]
+        async fn existed_user_should_return_true() {
+            let db = setup().await;
+
+            db.create_user(SignUpDTO {
+                name: "test_name".to_string(),
+                email: "test_email@email.com".to_string(),
+                password: "test_password".to_string(),
+            })
+            .await
+            .unwrap();
+
+            let result = db.user_exists_by_email("test_email@email.com").await;
+            assert!(result.is_ok());
+            assert!(result.unwrap());
+
+            teardown(db).await;
+        }
+
+        #[test]
+        async fn non_existed_user_should_return_false() {
+            let db = setup().await;
+
+            let result = db.user_exists_by_email("test_email@email.com").await;
+            assert!(result.is_ok());
+            assert!(!result.unwrap());
+
+            teardown(db).await;
+        }
+    }
+
+    mod user_exists_by_id {}
+
+    mod find_user_by_email {}
+
+    mod create_user {}
+}
