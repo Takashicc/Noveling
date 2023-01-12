@@ -25,7 +25,7 @@ async fn main() -> std::io::Result<()> {
     );
     env_logger::init();
 
-    let db = MongoRepo::init().await;
+    let db = MongoRepo::init(&constants::CONFIG.mongo_uri).await;
     let db_data = Data::new(db);
 
     HttpServer::new(move || {

@@ -1,4 +1,4 @@
-use crate::{constants, models::user_model::User};
+use crate::models::user_model::User;
 use mongodb::{bson::doc, Client, Collection};
 
 pub struct MongoRepo {
@@ -6,8 +6,7 @@ pub struct MongoRepo {
 }
 
 impl MongoRepo {
-    pub async fn init() -> Self {
-        let uri = &constants::CONFIG.mongo_uri;
+    pub async fn init(uri: &String) -> Self {
         let client = Client::with_uri_str(uri)
             .await
             .expect("Failed to parse Mongo URI");
